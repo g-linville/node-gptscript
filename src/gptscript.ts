@@ -12,7 +12,7 @@ export interface GlobalOpts {
     BaseURL?: string
     DefaultModel?: string
     DefaultModelProvider?: string
-    DatasetToolRepo?: string
+    DatasetTool?: string
     WorkspaceTool?: string
     Env?: string[]
 }
@@ -395,7 +395,7 @@ export class GPTScript {
 
         const result = await this.runBasicCommand("datasets", {
             workspaceID: workspaceID,
-            datasetToolRepo: this.opts.DatasetToolRepo ?? "",
+            datasetTool: this.opts.DatasetTool ?? "",
             env: this.opts.Env
         })
         return JSON.parse(result) as Array<DatasetMeta>
@@ -409,7 +409,7 @@ export class GPTScript {
         const result = await this.runBasicCommand("datasets/create", {
             input: JSON.stringify({datasetName: name, datasetDescription: description}),
             workspaceID: workspaceID,
-            datasetToolRepo: this.opts.DatasetToolRepo ?? "",
+            datasetTool: this.opts.DatasetTool ?? "",
             env: this.opts.Env
         })
         return JSON.parse(result) as Dataset
@@ -428,7 +428,7 @@ export class GPTScript {
                 elementContent: Buffer.from(elementContent).toString("base64")
             }),
             workspaceID: workspaceID,
-            datasetToolRepo: this.opts.DatasetToolRepo ?? "",
+            datasetTool: this.opts.DatasetTool ?? "",
             env: this.opts.Env
         })
         return JSON.parse(result) as DatasetElementMeta
@@ -450,7 +450,7 @@ export class GPTScript {
         return await this.runBasicCommand("datasets/add-elements", {
             input: JSON.stringify({datasetID, elements: serializableElements}),
             workspaceID: workspaceID,
-            datasetToolRepo: this.opts.DatasetToolRepo ?? "",
+            datasetTool: this.opts.DatasetTool ?? "",
             env: this.opts.Env,
         })
     }
@@ -463,7 +463,7 @@ export class GPTScript {
         const result = await this.runBasicCommand("datasets/list-elements", {
             input: JSON.stringify({datasetID}),
             workspaceID: workspaceID,
-            datasetToolRepo: this.opts.DatasetToolRepo ?? "",
+            datasetTool: this.opts.DatasetTool ?? "",
             env: this.opts.Env
         })
         return JSON.parse(result) as Array<DatasetElementMeta>
@@ -477,7 +477,7 @@ export class GPTScript {
         const result = await this.runBasicCommand("datasets/get-element", {
             input: JSON.stringify({datasetID, element: elementName}),
             workspaceID: workspaceID,
-            datasetToolRepo: this.opts.DatasetToolRepo ?? "",
+            datasetTool: this.opts.DatasetTool ?? "",
             env: this.opts.Env
         })
 
